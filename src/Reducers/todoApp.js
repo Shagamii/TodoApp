@@ -27,11 +27,6 @@ function whenTodoApp(state, message, action) {
   return { ...state, todos, todo: '' };
 }
 
-function whenResetTodoForm(state, action) {
-  console.log(action);
-
-  return { ...state, todo: '' }
-}
 
 export default function todoApp(state = initialState(), event) {
   switch (event.type) {
@@ -39,8 +34,6 @@ export default function todoApp(state = initialState(), event) {
     return whenChageCode(state, event.newValue, event.type);
   case TODO_APP.ADD_TODO:
     return whenTodoApp(state, event.message, event.type);
-  case TODO_APP.RESET_TODO_FORM:
-    return whenResetTodoForm(state, event.type);
   default:
     return state;
   }

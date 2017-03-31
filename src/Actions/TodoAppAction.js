@@ -15,9 +15,3 @@ export function onAddTodo(message) {
     message
   }
 }
-
-export function resetTodoForm() {
-  return {
-    type: TODO_APP.RESET_TODO_FORM
-   }
-}

@@ -11,15 +11,6 @@ class TodoApp extends Component {
     todoApp: PropTypes.object.isRequired
   }
 
-  componentWillMount() {
-    this.props.resetTodoForm();
-  }
-
-  componentWillUnmount() {
-    this.props.resetTodoForm();
-  }
-
-
   addTodo = event =>{
     event.preventDefault();
     this.props.onAddTodo(this.props.todoApp.todo);
