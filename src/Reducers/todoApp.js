@@ -27,6 +27,13 @@ function whenTodoApp(state, message, action) {
   return { ...state, todos, todo: '' };
 }
 
+function whenRemoveTodo(state, id, action) {
+  console.log(action);
+  const todos = state.todos.filter(todo => todo.id !== id);
+
+  return { ...state, todos }
+}
+
 
 export default function todoApp(state = initialState(), event) {
   switch (event.type) {
@@ -34,6 +41,8 @@ export default function todoApp(state = initialState(), event) {
     return whenChageCode(state, event.newValue, event.type);
   case TODO_APP.ADD_TODO:
     return whenTodoApp(state, event.message, event.type);
+  case TODO_APP.REMOVE_TODO:
+    return whenRemoveTodo(state, event.id, event.type);
   default:
     return state;
   }

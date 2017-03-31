@@ -49,7 +49,10 @@ class TodoApp extends Component {
               (
                 todos.map(todo =>{
                   return (
-                    <div key={todo.id}>
+                    <div
+                      key={todo.id}
+                      onClick={() => this.props.removeTodo(todo.id)}
+                      >
                       { todo.message }
                     </div>
                   )

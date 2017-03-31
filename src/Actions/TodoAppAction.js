@@ -13,5 +13,12 @@ export function onAddTodo(message) {
   return {
     type: TODO_APP.ADD_TODO,
     message
-  }
+  };
+}
+
+export function removeTodo(id) {
+  return {
+    type: TODO_APP.REMOVE_TODO,
+    id
+  };
 }
