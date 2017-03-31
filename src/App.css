@@ -1,0 +1,13 @@
+.container {
+  margin: 0 30px;
+}
+
+.form {
+  width: 48%;
+  float: left;
+}
+
+.markdown {
+  width: 48%;
+  float: left;
+}
