@@ -13,7 +13,11 @@ class TodoApp extends Component {
 
   addTodo = event =>{
     event.preventDefault();
-    this.props.onAddTodo(this.props.todoApp.todo);
+
+    { todo } = this.props.todoApp;
+    if (todo) {
+    this.props.onAddTodo(todo);
+    }
   }
 
   onChangeCode = event =>
@@ -45,7 +49,7 @@ class TodoApp extends Component {
           </form>
           <div className={`todoList`} >
             {
-              todos.lenth !== 0 ?
+              todo && todos.length !== 0 ?
               (
                 todos.map(todo =>{
                   return (
