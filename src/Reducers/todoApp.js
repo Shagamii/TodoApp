@@ -5,7 +5,8 @@ const { TODO_APP } = actionTypes;
 function initialState() {
   return {
     todos: [],
-    todo: ''
+    todo: '',
+    todos_done: []
    };
 };
 
@@ -23,6 +24,7 @@ function whenTodoApp(state, message, action) {
 
   console.log(action);
   console.log(message);
+  console.log(todos);
 
   return { ...state, todos, todo: '' };
 }
@@ -36,15 +38,14 @@ function whenRemoveTodo(state, id, action) {
 
 function whenChangeStatus(state, id, action) {
   console.log(action);
-  const todos = state.todos.map(todo =>{
-    if (todo.id === id) {
-      return Object.assign({}, state, {
-        completed: !state.completed
-      })
-    }
-  })
 
-  return { ...state, todos }
+  const todo_done = state.todos.filter(todo => todo.id === id);
+  state.todos_done.push(todo_done);
+  const todos_done = state.todos_done;
+  console.log(state.todos_done);
+
+  const todos = state.todos.filter(todo => todo.id !== id);
+  return { ...state, todos, todos_done }
 
 }
 

@@ -24,7 +24,7 @@ class TodoApp extends Component {
   this.props.onChangeCode(event.target.value);
 
   render() {
-    const { todo, todos } = this.props.todoApp;
+    const { todo, todos, todos_done } = this.props.todoApp;
     return (
       <div className="App">
         <div className="container">
@@ -48,46 +48,80 @@ class TodoApp extends Component {
             </button>
           </form>
           <div className={`todoList`} >
+            <div className={'tab un_completed'}>
+              <h2>UnCompleted</h2>
             {
-              todos.length !== 0 ?
+              todos && todos.length !== 0 ?
               (
                 todos.map(todo =>{
                   return (
                     <div
                       key={todo.id}
-                      style={{textDecoration: todo.completed ? 'line-through' : 'none'}}
                       >
-                      { todo.message }
-                      <button
-                        type='button'
-                        onClick={() => this.props.removeTodo(todo.id)}
-                        >
-                          削除
-                        </button>
+                        { todo.message }
                         <button
                           type='button'
-                          onClick={() => this.props.changeStatus(todo.id)}
+                          onClick={() => this.props.removeTodo(todo.id)}
                           >
-                            Done
+                            削除
                           </button>
+                          <button
+                            type='button'
+                            onClick={() => this.props.changeStatus(todo.id)}
+                            >
+                              Done
+                            </button>
+                          </div>
+                        )
+                      })
+                    ) :
+                    false
+                  }
+                </div>
+                <div className={`tab completed`}>
+                  <h2>Completed</h2>
+                {
+                  todos_done && todos_done.length !== 0 ?
+                  (
+                    todos_done.map(todo =>{
+                      return (
+                        <div className={`tab completed`}>
+                          <div
+                            key={todo[0].id}
+                            >
+                              { todo[0].message }
+                              <button
+                                type='button'
+                                onClick={() => this.props.removeTodo(todo[0].id)}
+                                >
+                                  削除
+                                </button>
+                                <button
+                                  type='button'
+                                  onClick={() => this.props.changeStatus(todo[0].id)}
+                                  >
+                                    Done
+                                  </button>
+                                </div>
+                              </div>
+                            )
+                          })
+                        ) :
+                        false
+                      }
                     </div>
-                  )
-                })
-              ) :
-              false
-            }
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+                  </div>
+                </div>
+              </div>
+            );
+          }
+        }
 
-const mapStateToProps = state => ({
-  todoApp: state.todoApp
-});
+        const mapStateToProps = state => ({
+          todoApp: state.todoApp
+        });
 
-const mapDispatchToProps = dispatch =>
-bindActionCreators(todoAppAction, dispatch);
+        const mapDispatchToProps = dispatch =>
+        bindActionCreators(todoAppAction, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
+        export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);

@@ -11,3 +11,9 @@
   width: 48%;
   float: left;
 }
+
+.tab {
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
+}
