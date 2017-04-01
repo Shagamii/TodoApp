@@ -14,7 +14,7 @@ class TodoApp extends Component {
   addTodo = event =>{
     event.preventDefault();
 
-    { todo } = this.props.todoApp;
+    const { todo } = this.props.todoApp;  
     if (todo) {
     this.props.onAddTodo(todo);
     }
