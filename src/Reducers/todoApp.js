@@ -34,6 +34,20 @@ function whenRemoveTodo(state, id, action) {
   return { ...state, todos }
 }
 
+function whenChangeStatus(state, id, action) {
+  console.log(action);
+  const todos = state.todos.map(todo =>{
+    if (todo.id === id) {
+      return Object.assign({}, state, {
+        completed: !state.completed
+      })
+    }
+  })
+
+  return { ...state, todos }
+
+}
+
 
 export default function todoApp(state = initialState(), event) {
   switch (event.type) {
@@ -43,6 +57,8 @@ export default function todoApp(state = initialState(), event) {
     return whenTodoApp(state, event.message, event.type);
   case TODO_APP.REMOVE_TODO:
     return whenRemoveTodo(state, event.id, event.type);
+  case TODO_APP.CHANGE_STATUS:
+    return whenChangeStatus(state, event.id, event.type);
   default:
     return state;
   }

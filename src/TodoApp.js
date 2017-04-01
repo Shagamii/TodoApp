@@ -12,8 +12,12 @@ class TodoApp extends Component {
   }
 
   addTodo = event =>{
+    const { todo } = this.props.todoApp;
+
     event.preventDefault();
-    this.props.onAddTodo(this.props.todoApp.todo);
+    if (todo.length !== 0) {
+      this.props.onAddTodo(todo);
+    }
   }
 
   onChangeCode = event =>
@@ -45,15 +49,27 @@ class TodoApp extends Component {
           </form>
           <div className={`todoList`} >
             {
-              todos.lenth !== 0 ?
+              todos.length !== 0 ?
               (
                 todos.map(todo =>{
                   return (
                     <div
                       key={todo.id}
-                      onClick={() => this.props.removeTodo(todo.id)}
+                      style={{textDecoration: todo.completed ? 'line-through' : 'none'}}
                       >
                       { todo.message }
+                      <button
+                        type='button'
+                        onClick={() => this.props.removeTodo(todo.id)}
+                        >
+                          削除
+                        </button>
+                        <button
+                          type='button'
+                          onClick={() => this.props.changeStatus(todo.id)}
+                          >
+                            Done
+                          </button>
                     </div>
                   )
                 })
