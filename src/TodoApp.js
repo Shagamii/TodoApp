@@ -12,12 +12,12 @@ class TodoApp extends Component {
   }
 
   addTodo = event =>{
+    event.preventDefault();
+    
     const { todo } = this.props.todoApp;
 
-    event.preventDefault();
     if (todo.length !== 0) {
       this.props.onAddTodo(todo);
-    }
   }
 
   onChangeCode = event =>
