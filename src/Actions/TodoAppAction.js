@@ -23,9 +23,10 @@ export function removeTodo(id) {
   };
 }
 
-export function changeStatus(id) {
+export function changeStatus(id, index) {
   return {
     type: TODO_APP.CHANGE_STATUS,
-    id
+    id,
+    index
   };
 }
