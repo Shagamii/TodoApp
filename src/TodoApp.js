@@ -49,7 +49,7 @@ class TodoApp extends Component {
           </form>
           <div className={`todoList`} >
             {
-              todo && todos.length !== 0 ?
+              todos && todos.length !== 0 ?
               (
                 todos.map(todo =>{
                   return (
