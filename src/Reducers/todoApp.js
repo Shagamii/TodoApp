@@ -5,8 +5,7 @@ const { TODO_APP } = actionTypes;
 function initialState() {
   return {
     todos: [],
-    todo: '',
-    todos_done: []
+    todo: ''
    };
 };
 
