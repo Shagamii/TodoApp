@@ -60,7 +60,26 @@ class TodoApp extends Component {
                       }}
                       key={todo.id}
                       >
-                      { todo.message }
+                      {
+                        todo.changingTodo ?
+                        <span>
+                          <form
+                            style={{
+                              display: 'inline-block'
+                            }}>
+                            <input
+                              type='text'
+                              onChange={ this.onChange }
+                              value={ todo.message } />
+                          </form>
+                        </span>
+                        :
+                        <span
+                          onClick={() => this.props.onClickTodo(todo.id, index)}>
+                          { todo.message }
+                        </span>
+                      }
+
                       <button
                         type='button'
                         onClick={() => this.props.removeTodo(todo.id)}

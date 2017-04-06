@@ -20,7 +20,7 @@ function whenTodoApp(state, message, action) {
   const nextId = Math.random();
   const todos = state.todos;
 
-  todos.push({id: nextId, message, completed: false});
+  todos.push({id: nextId, message, completed: false, changingTodo: false});
 
   console.log(action);
   console.log(todos);
@@ -50,6 +50,19 @@ function whenChangeStatus(state, action) {
   return { ...state, todos }
 }
 
+function whenClickTodo(state, action) {
+  console.log(action.type);
+
+  for (var i = 0; i < state.todos.length; i++) {
+    if (i === action.index) {
+      state.todos[i].changingTodo = true;
+    }
+  }
+
+  const todos = state.todos;
+
+  return { ...state, todos }
+}
 
 export default function todoApp(state = initialState(), event) {
   switch (event.type) {
@@ -60,7 +73,9 @@ export default function todoApp(state = initialState(), event) {
   case TODO_APP.REMOVE_TODO:
     return whenRemoveTodo(state, event.id, event.type);
   case TODO_APP.CHANGE_STATUS:
-    return whenChangeStatus(state, event)
+    return whenChangeStatus(state, event);
+  case TODO_APP.CLICK_TODO:
+    return whenClickTodo(state, event);
   default:
     return state;
   }

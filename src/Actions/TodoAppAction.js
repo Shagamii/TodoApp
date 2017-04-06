@@ -30,3 +30,11 @@ export function changeStatus(id, index) {
     index
   };
 }
+
+export function onClickTodo(id, index) {
+  return {
+    type: TODO_APP.CLICK_TODO,
+    id,
+    index
+  }
+}
