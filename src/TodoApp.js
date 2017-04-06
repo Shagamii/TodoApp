@@ -24,8 +24,14 @@ class TodoApp extends Component {
   onChangeCode = event =>
   this.props.onChangeCode(event.target.value);
 
+  onChangeTodo = event =>
+  this.props.onChangeTodo(event.target.value, event.target.name);
+
+  onBlurTodo = event =>
+  this.props.onBlurTodo(event.target.value, event.target.name);
+
   render() {
-    const { todo, todos } = this.props.todoApp;
+    const { todo, todos, newMessage } = this.props.todoApp;
     return (
       <div className="App">
         <div className="container">
@@ -69,13 +75,15 @@ class TodoApp extends Component {
                             }}>
                             <input
                               type='text'
-                              onChange={ this.onChange }
-                              value={ todo.message } />
+                              onChange={ this.onChangeTodo }
+                              onBlur={ this.onBlurTodo }
+                              name={index}
+                              value={ newMessage } />
                           </form>
                         </span>
                         :
                         <span
-                          onClick={() => this.props.onClickTodo(todo.id, index)}>
+                          onClick={() => this.props.onClickTodo(todo.id, todo.message, index)}>
                           { todo.message }
                         </span>
                       }

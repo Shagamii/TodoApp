@@ -6,7 +6,8 @@ function initialState() {
   return {
     todos: [],
     todo: '',
-    todos_done: []
+    todos_done: [],
+    newMessage: ''
    };
 };
 
@@ -59,9 +60,33 @@ function whenClickTodo(state, action) {
     }
   }
 
+  const newMessage = action.setMessage;
+
+  const todos = state.todos;
+
+  return { ...state, todos, newMessage }
+}
+
+function whenBlurTodo(state, type, newMessage, index) {
+  console.log(type);
+  console.log(newMessage);
+
+  for (var i = 0; i < state.todos.length; i++) {
+    if (i === index) {
+      state.todos.message[i] = newMessage;
+    }
+  }
+
   const todos = state.todos;
 
   return { ...state, todos }
+}
+
+function whenChangeTodo(state, newMessage, action) {
+  console.log(action);
+  console.log(newMessage);
+
+  return { ...state, newMessage }
 }
 
 export default function todoApp(state = initialState(), event) {
@@ -76,6 +101,10 @@ export default function todoApp(state = initialState(), event) {
     return whenChangeStatus(state, event);
   case TODO_APP.CLICK_TODO:
     return whenClickTodo(state, event);
+  case TODO_APP.BLUR_TODO:
+    return whenBlurTodo(state, event)
+  case TODO_APP.CHANGE_TODO:
+    return whenChangeTodo(state, event.newMessage, event.type);
   default:
     return state;
   }
