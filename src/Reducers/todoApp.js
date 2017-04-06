@@ -12,6 +12,7 @@ function initialState() {
 
 function whenChageCode(state, todo, action) {
   console.log(action);
+  console.log(todo);
   return { ...state, todo };
 }
 

@@ -60,41 +60,41 @@ class TodoApp extends Component {
                       }}
                       key={todo.id}
                       >
-                        { todo.message }
-                        <button
-                          type='button'
-                          onClick={() => this.props.removeTodo(todo.id)}
-                          >
-                            削除
-                          </button>
-                          <button
-                            type='button'
-                            onClick={() => this.props.changeStatus(todo.id, index)}
-                            >
-                              {
-                                todo.completed ?
-                                'Yet' :
-                                'Done'
-                              }
-                            </button>
-                          </div>
-                        )
-                      })
-                    ) :
-                    false
-                  }
-                </div>
-              </div>
-            </div>
-          );
-        }
-      }
+                      { todo.message }
+                      <button
+                        type='button'
+                        onClick={() => this.props.removeTodo(todo.id)}
+                        >
+                        削除
+                      </button>
+                      <button
+                        type='button'
+                        onClick={() => this.props.changeStatus(todo.id, index)}
+                        >
+                        {
+                          todo.completed ?
+                          'Yet' :
+                          'Done'
+                        }
+                      </button>
+                    </div>
+                  )
+                })
+              ) :
+              false
+            }
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-      const mapStateToProps = state => ({
-        todoApp: state.todoApp
-      });
+const mapStateToProps = state => ({
+  todoApp: state.todoApp
+});
 
-      const mapDispatchToProps = dispatch =>
-      bindActionCreators(todoAppAction, dispatch);
+const mapDispatchToProps = dispatch =>
+bindActionCreators(todoAppAction, dispatch);
 
-      export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
