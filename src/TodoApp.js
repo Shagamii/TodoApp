@@ -49,89 +49,89 @@ class TodoApp extends Component {
                 onChange={ this.onChangeCode }
                 value={ todo }
                 name='hoge'
-              />
+                />
             </div>
             <button
               type='submit'
               className={`submitButton`}
               onClick={ this.addTodo }
               >
-                追加
-              </button>
-            </form>
-            <div className={`todoList`} >
-              {
-                todos && todos.length !== 0 ?
-                (
-                  todos.map((todo, index) =>{
-                    return (
-                      <div
-                        style={{
-                          textDecoration: todo.completed ? 'line-through' : 'none'
-                        }}
-                        key={todo.id}
+              追加
+            </button>
+          </form>
+          <div className={`todoList`} >
+            {
+              todos && todos.length !== 0 ?
+              (
+                todos.map((todo, index) =>{
+                  return (
+                    <div
+                      style={{
+                        textDecoration: todo.completed ? 'line-through' : 'none'
+                      }}
+                      key={todo.id}
+                      >
+                      {
+                        todo.changingTodo ?
+                        <span>
+                          <form
+                            style={{
+                              display: 'inline-block'
+                            }}>
+                            <input
+                              type='text'
+                              onChange={ this.onChangeTodo }
+                              value={ newMessage } />
+                          </form>
+                          <button
+                            type='button'
+                            onClick={() => this.updateTodo(newMessage, index, todo.id)}
+                            >
+                            更新
+                          </button>
+                        </span>
+                        :
+                        <span>
+                          <span
+                            onClick={() => this.props.onClickTodo(todo.id, todo.message, index)}>
+                            { todo.message }
+                          </span>
+                          <button
+                            type='button'
+                            onClick={() => this.props.removeTodo(todo.id)}
+                            >
+                            削除
+                          </button>
+                        </span>
+                      }
+                      <button
+                        type='button'
+                        onClick={() => this.props.changeStatus(todo.id, index)}
                         >
-                          {
-                            todo.changingTodo ?
-                            <span>
-                              <form
-                                style={{
-                                  display: 'inline-block'
-                                }}>
-                                <input
-                                  type='text'
-                                  onChange={ this.onChangeTodo }
-                                  value={ newMessage } />
-                                </form>
-                                <button
-                                  type='button'
-                                  onClick={() => this.updateTodo(newMessage, index, todo.id)}
-                                  >
-                                    更新
-                                  </button>
-                                </span>
-                                :
-                                <span>
-                                  <span
-                                    onClick={() => this.props.onClickTodo(todo.id, todo.message, index)}>
-                                    { todo.message }
-                                  </span>
-                                  <button
-                                    type='button'
-                                    onClick={() => this.props.removeTodo(todo.id)}
-                                    >
-                                      削除
-                                    </button>
-                                  </span>
-                                }
-                                <button
-                                  type='button'
-                                  onClick={() => this.props.changeStatus(todo.id, index)}
-                                  >
-                                    {
-                                      todo.completed ?
-                                      'Yet' :
-                                      'Done'
-                                    }
-                                  </button>
-                                </div>
-                              )
-                            })
-                          ) :
-                          false
+                        {
+                          todo.completed ?
+                          'Yet' :
+                          'Done'
                         }
-                      </div>
+                      </button>
                     </div>
-                  </div>
-                );
-              }
+                  )
+                })
+              ) :
+              false
             }
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-            const mapStateToProps = state => ({
-              todoApp: state.todoApp
-            });
+const mapStateToProps = state => ({
+  todoApp: state.todoApp
+});
 
-            const mapDispatchToProps = dispatch =>
-            bindActionCreators(todoAppAction, dispatch);
+const mapDispatchToProps = dispatch =>
+bindActionCreators(todoAppAction, dispatch);
 
-            export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);
