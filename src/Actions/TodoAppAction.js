@@ -40,10 +40,10 @@ export function onClickTodo(id, setMessage, index) {
   }
 }
 
-export function onBlurTodo(setMessage, index) {
+export function updateTodo(newMessage, index) {
   return {
-    type: TODO_APP.BLUR_TODO,
-    setMessage,
+    type: TODO_APP.UPDATE_TODO,
+    newMessage,
     index
   }
 }

@@ -6,7 +6,6 @@ function initialState() {
   return {
     todos: [],
     todo: '',
-    todos_done: [],
     newMessage: ''
    };
 };
@@ -31,14 +30,14 @@ function whenTodoApp(state, message, action) {
 
 function whenRemoveTodo(state, id, action) {
   console.log(action);
-  console.log(state);
+
   const todos = state.todos.filter(todo => todo.id !== id);
 
   return { ...state, todos }
 }
 
 function whenChangeStatus(state, action) {
-  console.log(action);
+  console.log(action.type);
 
   for (var i = 0; i < state.todos.length; i++) {
     if (i === action.index) {
@@ -61,19 +60,18 @@ function whenClickTodo(state, action) {
   }
 
   const newMessage = action.setMessage;
-
   const todos = state.todos;
 
   return { ...state, todos, newMessage }
 }
 
-function whenBlurTodo(state, type, newMessage, index) {
-  console.log(type);
-  console.log(newMessage);
+function whenUpdateTodo(state, action) {
+  console.log(action);
 
   for (var i = 0; i < state.todos.length; i++) {
-    if (i === index) {
-      state.todos.message[i] = newMessage;
+    if (i === action.index) {
+      state.todos[i].message = action.newMessage;
+      state.todos[i].changingTodo = false;
     }
   }
 
@@ -101,8 +99,8 @@ export default function todoApp(state = initialState(), event) {
     return whenChangeStatus(state, event);
   case TODO_APP.CLICK_TODO:
     return whenClickTodo(state, event);
-  case TODO_APP.BLUR_TODO:
-    return whenBlurTodo(state, event)
+  case TODO_APP.UPDATE_TODO:
+    return whenUpdateTodo(state, event)
   case TODO_APP.CHANGE_TODO:
     return whenChangeTodo(state, event.newMessage, event.type);
   default:
