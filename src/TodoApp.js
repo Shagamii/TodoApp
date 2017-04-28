@@ -35,16 +35,23 @@ class TodoApp extends Component {
     }
   }
 
+
   render() {
     const { todo, todos, newMessage } = this.props.todoApp;
+
+    const labelName = completed => {
+      const label_name = completed ? 'info' : 'danger';
+      return label_name;
+    }
+
     return (
       <div className="App">
         <div className="container">
           <h1>TodoApp with Redux</h1>
           <form>
             <div className="form">
-
               <input
+                className='form-control'
                 type='text'
                 onChange={ this.onChangeCode }
                 value={ todo }
@@ -53,7 +60,7 @@ class TodoApp extends Component {
             </div>
             <button
               type='submit'
-              className={`submitButton`}
+              className={`submitButton btn btn-primary`}
               onClick={ this.addTodo }
               >
               追加
@@ -66,9 +73,9 @@ class TodoApp extends Component {
                 todos.map((todo, index) =>{
                   return (
                     <div
-                      style={{
-                        textDecoration: todo.completed ? 'line-through' : 'none'
-                      }}
+                      // style={{
+                      //   textDecoration: todo.completed ? 'line-through' : 'none'
+                      // }}
                       key={todo.id}
                       >
                       {
@@ -79,12 +86,14 @@ class TodoApp extends Component {
                               display: 'inline-block'
                             }}>
                             <input
+                              className='form-control'
                               type='text'
                               onChange={ this.onChangeTodo }
                               value={ newMessage } />
                           </form>
                           <button
                             type='button'
+                            className='btn btn-warning'
                             onClick={() => this.updateTodo(newMessage, index, todo.id)}
                             >
                             更新
@@ -93,11 +102,13 @@ class TodoApp extends Component {
                         :
                         <span>
                           <span
+                            className={`alert alert-${labelName(!todo.completed)}`}
                             onClick={() => this.props.onClickTodo(todo.id, todo.message, index)}>
                             { todo.message }
                           </span>
                           <button
                             type='button'
+                            className='btn btn-danger'
                             onClick={() => this.props.removeTodo(todo.id)}
                             >
                             削除
@@ -106,6 +117,7 @@ class TodoApp extends Component {
                       }
                       <button
                         type='button'
+                        className='btn btn-success'
                         onClick={() => this.props.changeStatus(todo.id, index)}
                         >
                         {
