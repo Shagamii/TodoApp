@@ -1,0 +1,12 @@
+.container {
+  margin: 0 30px;
+}
+
+.form {
+  width: 48%;
+  float: left;
+}
+
+.todo {
+  margin: 15px 0;
+}

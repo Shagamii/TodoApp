@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import * as todoAppAction from './Actions/TodoAppAction';
 
-import './App.css';
+import './styles/App.css';
 
 class TodoApp extends Component {
   static propTypes = {
@@ -73,9 +73,11 @@ class TodoApp extends Component {
                 todos.map((todo, index) =>{
                   return (
                     <div
+                      className='todo'
                       // style={{
                       //   textDecoration: todo.completed ? 'line-through' : 'none'
                       // }}
+
                       key={todo.id}
                       >
                       {
